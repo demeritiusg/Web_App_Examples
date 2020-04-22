@@ -1,3 +1,4 @@
+<div id="purchaser-clearing-utility"></div>
 <script>
     Dropzone.autoDiscover = false;
 

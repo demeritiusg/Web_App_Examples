@@ -1,10 +1,15 @@
 {% extends "base.html" %}
 
 {% set title = "Accounting"  %}
-
-{% block content %}
+<head>
+    {% block scripts %}
+    {{ block.super }}
+    <script href="{{ url_for('static', filename='Accounting.js') }}" type="text/javascript"></script>
+    {% endblock %}
+</head>
 <body>
-<div id="purchaser-clearing-utility"></div>
+{% block content %}
+
+{% endblock %}
 
 </body>
-{% endblock %}

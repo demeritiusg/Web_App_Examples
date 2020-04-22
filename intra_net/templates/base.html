@@ -10,12 +10,6 @@
         {% else %}
             <title>Website</title>
         {% endif %}
-        {% block scripts %}
-            {% if request.endpoint == 'acct_purch_clearing' %}
-                <script src="{{ url_for('static', filename='JS/Accounting.js') }}"></script>
-            {% else %}
-                <script></script>
-        {% endblock scripts %}
     {% endblock %}
 </head>
 <body>
