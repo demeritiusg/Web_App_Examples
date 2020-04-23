@@ -3,6 +3,10 @@ body {
 	color: #58585A;
 }
 
+h1 {
+  color: red;
+}
+
 .container-header {
 	width: 100%;
 	text-align: center;
