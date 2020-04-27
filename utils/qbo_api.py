@@ -17,11 +17,11 @@ import requests
 from frozendict import frozendict
 
 # from rc_code.helpers import unique_filename
-from rc_code.helpers.excel import to_xl_tmp
-from utils import definitions
+from utils import definitions, rc_helpers
 
 
 from settings import BASE_DIR
+from utils.rc_helpers import to_xl_tmp
 
 RC_QBO_Exception = 'Pass'
 
@@ -1328,7 +1328,7 @@ def create_resources(qbo_base_url, realm_id, oauth, resource_name, resources):
 
     batch_item_response = []
 
-    TOKENS_FILE = r'{}\tokens.cfg'.format(this_dir)
+    TOKENS_FILE = r'{}\utils\tokens.cfg'.format(BASE_DIR)
     token_config = ConfigParser()
     token_config.read(TOKENS_FILE)
 
@@ -1415,7 +1415,7 @@ def update_resources(qbo_base_url, realm_id, oauth, resource_name, resources):
 
     batch_item_response = []
 
-    TOKENS_FILE = r'{}\tokens.cfg'.format(this_dir)
+    TOKENS_FILE = r'{}\utils\tokens.cfg'.format(BASE_DIR)
     token_config = ConfigParser()
     token_config.read(TOKENS_FILE)
 
