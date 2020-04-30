@@ -6,55 +6,72 @@ import xlsxwriter
 product_name = ['gas', 'ngl', 'other', 'oil']
 # uploaded file
 file = r'C:\Users\Admin\Downloads\MILL_2020-03-30_0d8b925d15.csv'
-writer = pd.ExcelWriter('volumes_report_wellanm.xlsx', engine='xlsxwriter', date_format='YYYY-MM')
+writer = pd.ExcelWriter('volumes_report_wellan2222m.xlsx', engine='xlsxwriter', date_format='YYYY-MM')
 sheet_name = 'Chart'
 
-overall_df = pd.read_csv(file, parse_dates=['production_date', 'income_date'])
-year_list = overall_df['production_date'].drop_duplicates().values.tolist()
+overall_df = pd.read_csv(file, parse_dates=['production_date', 'income_date']).fillna('-')
+overall_df['filter_date'] = overall_df.production_date.dt.strftime('%Y')
+# print(overall_df.columns.tolist())
 income_year_list = overall_df['income_date'].drop_duplicates().values.tolist()
 # pd.to_datetime(overall_df.productiondate)
 
-year_list.sort(reverse=True)
 income_year_list.sort(reverse=True)
-yr = year_list[:13]
 income_yr = income_year_list[:13]
-
-df = overall_df[overall_df['production_date'].isin(yr)]
 income_df = overall_df[overall_df['income_date'].isin(income_yr)]
 
+df = overall_df[overall_df['filter_date'] >= '2019']
+
 col = income_df['normalized_well'].drop_duplicates().values.tolist()
-df = df[df['normalized_well'].isin(col)]
+# df = df[df['normalized_well'].isin(col)]
 
+for c in col:
+    raw_df = df[df['normalized_well'] == c]
+    # print(df.head())
+    for p in product_name:
+        # print(raw_df.head())
+        # raws = raw_df.filter()
+        try:
+            raws = df[df.apply(lambda x: x['simple_product_name'] == p, axis=1)]
+        except KeyError:
+            pass
 
-for p in product_name:
-    raw_df = df[df['simple_product_name'] == p]
+# print(raws.head())
+totals_rev_prod = raws.groupby(['normalized_well', 'production_date'])[
+    'owner_net_value'].sum().reset_index()  # correct
+totals_rev_prod = totals_rev_prod.rename(columns={'owner_net_value': 'prod_month'}).round(0)
 
-    totals_rev_prod = df.groupby(['normalized_well', 'production_date'])['owner_net_value'].sum().reset_index()  # correct
-    totals_rev_prod = totals_rev_prod.rename(columns={'owner_net_value': 'prod_month'}).round(0)
-
-    totals_rev_acct = income_df.groupby(['normalized_well', 'income_date'])['owner_net_value'].sum().reset_index()  # correct
-    totals_rev_acct = totals_rev_acct.rename(
-        columns={'income_date': 'production_date', 'owner_net_value': 'acct_month'}).round(0)
-
-vols_table = pd.pivot_table(df, values='resolved_owner_volume', index=['normalized_well', 'production_date'], columns='simple_product_name',
-                            aggfunc=np.sum)
+totals_rev_acct = income_df.groupby(['normalized_well', 'production_date'])[
+    'owner_net_value'].sum().reset_index()  # correct
+totals_rev_acct = totals_rev_acct.rename(
+    columns={'income_date': 'production_date', 'owner_net_value': 'acct_month'}).round(0).fillna('-')
+# print(totals_rev_prod.columns.tolist())
+# print(totals_rev_prod.head())
+# print(totals_rev_acct.head())
+vols_table = pd.pivot_table(raws, values='resolved_owner_volume', index=['normalized_well', 'production_date'],
+                            columns='simple_product_name',
+                            aggfunc=np.sum).fillna(0)
 vols_table['gas_boe'] = vols_table['gas'] / 6
 vols_table['oil_boe'] = vols_table['gas_boe'] + vols_table['oil']
 vols_table['place_holder1'] = 62
 vols_table['place_holder2'] = 3
-
-price_table = pd.pivot_table(df, values='resolved_price', index=['normalized_well', 'production_date'], columns='simple_product_name',
-                             aggfunc=np.mean).round(2).fillna('-')
+# print(vols_table.columns.tolist())
+# print(totals_rev_prod.columns.tolist())
+price_table = pd.pivot_table(raws, values='resolved_price', index=['normalized_well', 'production_date'],
+                             columns='simple_product_name',
+                             aggfunc=np.mean).round(2).fillna(0)
 
 df_pivot = vols_table.merge(price_table, on=['normalized_well', 'production_date']).reset_index().merge(totals_rev_prod,
-                                                                                   on=['normalized_well', 'production_date']).merge(
-    totals_rev_acct, on=['normalized_well', 'production_date']).fillna('-')
-
+                                                                                                        on=[
+                                                                                                            'normalized_well',
+                                                                                                            'production_date']).merge(
+    totals_rev_acct, on=['normalized_well', 'production_date'])
+# print(df_pivot)
 df_pivot['prod_date'] = df_pivot['production_date'].dt.strftime('%Y-%m')
 
 df_pivot = df_pivot[['normalized_well', 'prod_date', 'prod_month', 'acct_month', 'oil_boe', 'oil_x',
                      'gas_x', 'gas_boe', 'ngl_x', 'other_x', 'place_holder1', 'place_holder2',
                      'oil_y', 'gas_y', 'ngl_y', 'other_y']]
+# print(df_pivot.head())
 
 df_pivot.to_excel(writer, index=False, header=False, startrow=29, startcol=1, sheet_name=sheet_name)
 
@@ -174,4 +191,4 @@ writer.save()
 
 # TODO Get the api key for the pricing from EIA.gov
 # returned returned file
-print(df_pivot.head())
+# print(df_pivot.head())
