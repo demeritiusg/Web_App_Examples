@@ -48,3 +48,11 @@ QBO_COMPANIES = {
 
 
 redirect_uri = "https://rc.royaltyclearinghouse.com/home/call-back"
+
+db_username = []
+db_pass = []
+db_uri = []
+
+sugar_username = []
+sugar_key = []
+
