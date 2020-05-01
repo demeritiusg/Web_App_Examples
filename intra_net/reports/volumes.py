@@ -30,8 +30,7 @@ for p in product_name:
     totals_rev_prod = totals_rev_prod.rename(columns={'owner_net_value': 'prod_month'}).round(0)
 
     totals_rev_acct = income_df.groupby(['income_date'])['owner_net_value'].sum().reset_index()  # correct
-    totals_rev_acct = totals_rev_acct.rename(
-        columns={'income_date': 'production_date', 'owner_net_value': 'acct_month'}).round(0)
+    totals_rev_acct = totals_rev_acct.rename(columns={'income_date': 'production_date', 'owner_net_value': 'acct_month'}).round(0)
 
 vols_table = pd.pivot_table(df, values='resolved_owner_volume', index='production_date', columns='simple_product_name',
                             aggfunc=np.sum)
@@ -162,10 +161,10 @@ ws.merge_range('M28:P28', 'Actual Pricing by Production Month', merge_cell_forma
 
 ws.set_column('A:A', 2)
 ws.set_column('B:B', 12, date_fromat)
-ws.set_column('C:D', 14, currancy_format)
-ws.set_column('E:J', 14, cell_format)
+ws.set_column('D:E', 14, currancy_format)
+ws.set_column('F:J', 14, cell_format)
 ws.set_column('K:L', 10, cell_format)
-ws.set_column('M:P', 14, currancy_format_dec)
+ws.set_column('K:O', 14, currancy_format_dec)
 
 writer.save()
 
