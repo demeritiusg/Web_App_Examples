@@ -29,8 +29,8 @@ ifc = overall_df.groupby(['normalized_well'])['income_date']
 overall_df['pmin'] = pfc.transform(min)
 overall_df['imin'] = ifc.transform(min)
 
-df = overall_df[overall_df['imin'] >= '2018-11-30']
-income_df = overall_df[overall_df['imin'] >= '2018-12-30']
+df = overall_df[overall_df['imin'] >= '2019-01-01']
+income_df = overall_df[overall_df['imin'] >= '2019-01-01']
 
 print(df['simple_product_name'].drop_duplicates().values.tolist())
 print(income_df['simple_product_name'].drop_duplicates().values.tolist())
@@ -85,13 +85,12 @@ price_table = pd.pivot_table(df, values='resolved_price', index=['normalized_wel
 df_piv = vols_table.merge(price_table, on=['normalized_well', 'production_date']).reset_index().merge(totals_rev_prod,
                                                                                                       on=[
                                                                                                           'normalized_well',
-                                                                                                          'production_date']).fillna(
-    '-')
+                                                                                                          'production_date']).fillna('-')
 
 df_pivot = df_piv.merge(totals_rev_acct, left_on=['normalized_well', 'production_date'],
-                        right_on=['normalized_well', 'income_date'])
+                        right_on=['normalized_well', 'income_date'], how= 'left')
 
-# print(df_pivot)
+print(df_piv)
 df_pivot['prod_date'] = df_pivot['production_date'].dt.strftime('%Y-%m')
 df_pivot.fillna('-', inplace=True)
 # # tbl = []
