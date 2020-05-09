@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% set title = "Funded"  %}
+<head>
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+{% block content %}
+{{ chart|safe }}
+{% endblock %}
+</body>
