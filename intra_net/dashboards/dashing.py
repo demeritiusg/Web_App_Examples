@@ -5,18 +5,29 @@ from dash.dependencies import Output, Input
 import pandas as pd
 import mpld3
 import matplotlib
-from numpy.random import rand
+import numpy as np
 
 # TODO add a proper charts and graphs
 
 def process_data():
-    # TODO this will load all the data and do the maths
+    #this will load all the data and do the maths
 
-    data = {'row_1': [3, 2, 1, 0], 'row_2': ['a', 'b', 'c', 'd']}
+    # TODO add html button
+    df = pd.read_excel(r'C:\Users\Admin\PycharmProjects\untitled4\Copy of Funded Deals 2020.xlsx', index=False)
 
-    df = pd.DataFrame.from_dict(data, orient='index')
+    df_pivot = pd.pivot_table(df, values=['Opportunity Name', 'Committed Amount'],  index=['Funded Month'], aggfunc={'Opportunity Name': len, 'Committed Amount': np.sum}, fill_value=0, margins=True)
 
-    html = df.to_html()
+    df_pivot2 = pd.pivot_table(df, values=['Opportunity Name', 'Committed Amount'],  index=['Opportunity Source'], aggfunc={'Opportunity Name': len, 'Committed Amount': np.sum}, fill_value=0, margins=True)
+
+    df_pivot3 = pd.pivot_table(df, values=['Opportunity Name', 'Committed Amount'],  index=['State', 'Summary of Counties'], aggfunc={'Opportunity Name': len, 'Committed Amount': np.sum}, fill_value=0, margins=True)
+
+    df_pivot = df_pivot[['Opportunity Name', 'Committed Amount']]
+
+    df_pivot2 = df_pivot2[['Opportunity Name', 'Committed Amount']]
+
+    df_pivot3 = df_pivot3[['Opportunity Name', 'Committed Amount']]
+
+    html = df_pivot.to_html()
     print(html)
     # read_data_in
     return html
