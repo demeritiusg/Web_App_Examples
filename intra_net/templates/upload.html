@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% set title = "Upload"  %}
+<head>
+    {% block head %}
+
+    {% endblock %}
+</head>
+<body>
+{% block content %}
+
+<form action="/store/csv" method="post" accept-charset="utf-8"
+      enctype="multipart/form-data">
+
+    <input id="csv" name="csv" type="file" value=""/>
+
+    <input type="submit" value="submit"/>
+</form>
+
+{% endblock %}
+</body>

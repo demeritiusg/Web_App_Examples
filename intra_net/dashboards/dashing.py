@@ -28,7 +28,7 @@ def process_data():
     df_pivot3 = df_pivot3[['Opportunity Name', 'Committed Amount']]
 
     html = df_pivot.to_html()
-    print(html)
+
     # read_data_in
     return html
 
