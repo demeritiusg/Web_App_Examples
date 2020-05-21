@@ -1,6 +1,13 @@
 import os
 from aiohttp import web
 
+# TODO need to upload each month
+# TODO encrypt all numbers
+# TODO save every month
+# TODO process every month as a single
+# TODO add SQL capability to build reporting
+
+
 async def store_mp3_handler(request):
 
     reader = await request.multipart()
