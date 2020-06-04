@@ -12,8 +12,16 @@
     {% endblock %}
 </head>
 <body>
+<ul>
+    <li><a class="active" href="">Home</a></li>
+    <li><a href="">Index</a></li>
+    <li><a href="">Contact</a></li>
+    <li><a href="">About</a></li>
+</ul>
     {% block content %}
-
+    {% endblock %}
+    {% block footer %}
+    &copy; Copyright 2020 by <a href=" ">myself</a>.
     {% endblock %}
 </body>
 </html>

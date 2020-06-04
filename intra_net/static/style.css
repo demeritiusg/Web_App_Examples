@@ -7,6 +7,39 @@ h1 {
   color: red;
 }
 
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+  border-right:1px solid #bbb;
+}
+
+li:last-child {
+  border-right: none;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #111;
+}
+
+.active {
+  background-color: #4CAF50;
+}
+
 .container-header {
 	width: 100%;
 	text-align: center;
@@ -463,27 +496,7 @@ tr.review-header td {
 .red {
 	background-color: rgb(255, 157, 173);
 }
-/*
-#unicorn {
-	position: absolute;
-	opacity: 0;
-	margin-left: auto;
-	margin-right: auto;
-	bottom: -300px;
-	left: 38%;
-	height: 160px;
-	width: 220px;
-}
 
-.rainbow {
-	display: flex;
-	animation: rainbow 3s infinite;
-	background-image: url({{ static('img/unicorn.gif')
-}
-*/
-
-}
-);
 height: 160px;
 width: 220px;
 align-items: center;
@@ -494,31 +507,8 @@ border-radius: 5px;
 border: 2px solid rgb(126,
 0,
 119);
+}
 
-}
-@keyframes rainbow {
-	0% {
-		color: orange;
-	}
-	10% {
-		color: purple;
-	}
-	20% {
-		color: red;
-	}
-	40% {
-		color: yellow;
-	}
-	60% {
-		color: green;
-	}
-	100% {
-		color: blue;
-	}
-	100% {
-		color: orange;
-	}
-}
 #linking-file {
 	display: none;
 	visibility: hidden;
