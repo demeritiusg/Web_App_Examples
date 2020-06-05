@@ -8,16 +8,11 @@
         {% else %}
             <title>Website</title>
         {% endif %}
+    {% include "nav.html" %}
     <link rel="stylesheet" type="text/css" href="{{ url('static', filename='style.css') }}" />
     {% endblock %}
 </head>
 <body>
-<ul>
-    <li><a class="active" href="">Home</a></li>
-    <li><a href="">Index</a></li>
-    <li><a href="">Contact</a></li>
-    <li><a href="">About</a></li>
-</ul>
     {% block content %}
     {% endblock %}
     {% block footer %}

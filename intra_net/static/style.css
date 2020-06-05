@@ -1,10 +1,10 @@
 body {
 	font-family: Arial, sans-serif;
-	color: #58585A;
+	color: blue;
 }
 
 h1 {
-  color: red;
+  color: #1a1aff;
 }
 
 ul {
@@ -40,14 +40,6 @@ li a:hover:not(.active) {
   background-color: #4CAF50;
 }
 
-.container-header {
-	width: 100%;
-	text-align: center;
-	border-bottom: 1px solid black;
-	font-size: 1.2em;
-	color: #333;
-}
-
 #content {
 	position: absolute;
 	top: 150px;
@@ -56,190 +48,6 @@ li a:hover:not(.active) {
 	height: 100%;
 }
 
-
-/* Dashboards */
-
-#dashboards-container {
-	display: inline-block;
-	float: left;
-	min-width: 20%;
-	height: 200px;
-}
-
-#dashboards-content {
-	position: relative;
-	width: 100%;
-	height: 100%;
-	padding-top: 5px;
-}
-
-.dashboards-item {
-	clear: both;
-	margin-top: 5px;
-}
-
-.dashboards-item a,
-a:visited {
-	color: #58585A;
-	text-decoration: none;
-}
-
-.dashboards-item a:hover {
-	color: #004b8d;
-	text-decoration: underline;
-}
-
-
-/* utilities */
-
-#utilities-container {
-	display: inline-block;
-	float: left;
-	width: 20%;
-	height: 200px;
-	margin-left: 10%;
-}
-
-#utilities-content {
-	position: relative;
-	width: 100%;
-	height: 100%;
-	padding-top: 5px;
-}
-
-.utilities-item {
-	clear: both;
-	margin-top: 5px;
-}
-
-.utilities-item a,
-a:visited {
-	color: #58585A;
-	text-decoration: none;
-}
-
-.utilities-item a:hover {
-	color: #004b8d;
-	text-decoration: underline;
-}
-
-
-/* This is a single-line comment */
-
-#mailings-container {
-	display: inline-block;
-	float: right;
-	width: 40%;
-	color: #58585A;
-}
-
-#mailings-content {
-	position: relative;
-	width: 100%;
-	//height: 100%;
-	padding-top: 5px;
-}
-
-.mailings-item {
-	position: relative;
-	clear: both;
-	margin-top: 5px;
-}
-
-.mailings-column {
-	position: relative;
-	float: left;
-}
-
-.mailings-county-name {
-	position: relative;
-	width: 52%;
-	margin-right: 4%;
-}
-
-.mailings-offer-count {
-	position: relative;
-	width: 16%;
-	margin-right: 8%;
-	text-align: right;
-}
-
-.mailings-printdate {
-	position: relative;
-	width: 20%;
-	text-align: right;
-}
-
-
-/* This is a single-line comment */
-
-#recent-opportunities-container {
-	display: inline-block;
-	clear: both;
-	width: 100%;
-	margin-top: 50px;
-}
-
-.recent-opportunities-item {
-	position: relative;
-	clear: both;
-	margin-top: 5px;
-}
-
-.recent-opportunities-name {
-	float: left;
-	width: 35%;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	overflow: hidden;
-}
-
-.recent-opportunities-name a:link {
-	color: #004b8d;
-}
-
-.recent-opportunities-name a:visited {
-	color: #58585A;
-}
-
-.recent-opportunities-status {
-	float: left;
-	width: 30%;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	overflow: hidden;
-}
-
-.recent-opportunities-status-reason {
-	float: left;
-	width: 25%;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	overflow: hidden;
-}
-
-.recent-opportunities-date-entered {
-	float: left;
-	width: 10%;
-	text-align: right;
-}
-
-
-/* This is a single-line comment */
-
-#app-run-container {}
-
-#error-message {
-	position: absolute;
-	left: 0;
-	bottom: 20px;
-	width: 70%;
-	margin-left: 14%;
-	padding: 1% 2% 1% 2%;
-	background-color: rgba(255, 157, 173, 0.85);
-	text-align: left;
-	font-family: monospace;
-}
 
 #flex-container {
 	display: flex;
@@ -489,27 +297,12 @@ tr.review-header td {
 	border-top: 1px solid black;
 }
 
-.calculated-unmatched {
-	background-color: rgb(255, 157, 173);
-}
-
-.red {
-	background-color: rgb(255, 157, 173);
-}
-
-height: 160px;
-width: 220px;
-align-items: center;
-justify-content: center;
-font-size: 24pt;
-text-shadow: 1px 1px #000000;
-border-radius: 5px;
-border: 2px solid rgb(126,
-0,
-119);
-}
-
 #linking-file {
 	display: none;
 	visibility: hidden;
+}
+
+p {
+    color: red;
+    text-align: center;
 }
