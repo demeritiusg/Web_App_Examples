@@ -1,8 +1,3 @@
-body {
-	font-family: Arial, sans-serif;
-	color: blue;
-}
-
 h1 {
   color: #1a1aff;
 }
@@ -303,6 +298,6 @@ tr.review-header td {
 }
 
 p {
-    color: red;
-    text-align: center;
+  font-family: verdana;
+  font-size: 20px;
 }

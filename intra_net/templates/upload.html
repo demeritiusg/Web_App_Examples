@@ -1,14 +1,11 @@
 {% extends "base.html" %}
-
-{% set title = "Upload"  %}
-<head>
-    {% block head %}
-
-    {% endblock %}
-</head>
+{% block head %}
+<title>{{title | safe}}</title>
+<link rel="stylesheet" href="{{ url('static', filename='stles.css') }}">
+{% endblock %}
 <body>
 {% block content %}
-
+<h1>Upload Form</h1>
 <form action="/store/csv" method="post" accept-charset="utf-8"
       enctype="multipart/form-data">
 

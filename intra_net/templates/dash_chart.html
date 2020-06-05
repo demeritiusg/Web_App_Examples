@@ -1,12 +1,8 @@
 {% extends "base.html" %}
-
-{% set title = "Funded"  %}
-<head>
-    {% block head %}
-    <h1>2020 Summary -  Funded Deals </h1>
-    <i>Funded deals by Month and by Acquisitions Channel</i>
-    {% endblock %}
-</head>
+{% block head %}
+<title>{{title | safe}}</title>
+<link rel="stylesheet" href="{{ url('static', filename='stles.css') }}">
+{% endblock %}
 <body>
 {% block content %}
 {{ chart|safe }}

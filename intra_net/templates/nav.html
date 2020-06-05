@@ -1,6 +1,10 @@
+<div class="header">
+    <h1>My Website</h1>
+    <p>Resize the browser window to see the effect.</p>
+</div>
 <ul class="active" >
-    <li><a href="">Home</a></li>
-    <li><a href="">Index</a></li>
-    <li><a href="">Contact</a></li>
-    <li><a href="">About</a></li>
+    <li><a href="{{ url('index') }}">Home</a></li>
+    <li><a href="{{ url('accounting') }}">Accounting</a></li>
+    <li><a href="{{ url('uploaded') }}">Upload</a></li>
+    <li style="float:right"><a href="{{ url('About') }}" >About</a></li>
 </ul>
