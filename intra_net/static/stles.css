@@ -64,10 +64,22 @@ li a:hover:not(.active) {
   background-color: #4CAF50;
 }
 
-.column.side {
+.left, .right {
   width: 25%;
 }
 
-.column.middle {
+.middle {
   width: 50%;
+}
+
+.column {
+  float: left;
+  padding: 10px;
+  background-color:#ccc;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
 }

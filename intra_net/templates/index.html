@@ -5,9 +5,20 @@
 {% endblock %}
 
 <body>
-{% block content %}
-<h1>Index</h1>
-<p>This is the front page</p>
-{% endblock %}
+<h1>Indexs </h1>
+<div class="row">
+    <div class="column right">
+        {% block right %}
+        <p>This is the front page</p>
+        {% endblock right %}
+    </div>
+    <div class="column middle">
+        {% block middle %}
+        <p>This is the front page</p>
+        {% endblock middle %}
+    </div>
+    <div class="column left">
 
+    </div>
+</div>
 </body>
