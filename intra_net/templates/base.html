@@ -8,24 +8,26 @@
         {% else %}
             <title>Website</title>
         {% endif %}
-    <link rel="stylesheet" href="{{ url('static', filename='stles.css') }}">
+    <link rel="stylesheet" href="{{ url('static', filename='stles.css')}}">
     {% endblock %}
 </head>
 <body>
+{%block content%}
 <div class="row">
-        <div class="column right">
-            {% block right %}
-            {% endblock right %}
+        <div class="column left">
+            {% block left %}
+            {% endblock %}
         </div>
         <div class="column middle">
             {% block middle %}
-            {% endblock middle %}
+            {% endblock %}
         </div>
-        <div class="column left">
-            {% block left %}
-            {% endblock left %}
+        <div class="column right">
+            {% block right %}
+            {% endblock%}
         </div>
 </div>
+{% endblock %}
     {% block footer %}
     &copy; Copyright 2020 by <a href=" ">myself</a>.
     {% endblock %}
