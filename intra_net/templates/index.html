@@ -5,6 +5,9 @@
 {% endblock %}
 
 <body>
+{% block content %}
+<h1>Front page</h1>
+
 <div class="row">
     <div class="column left">
         {% block left %}
@@ -22,4 +25,5 @@
         {% endblock %}
     </div>
 </div>
+{% endblock %}
 </body>
