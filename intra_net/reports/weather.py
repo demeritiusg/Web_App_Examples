@@ -4,12 +4,22 @@ import pprint
 import time
 import json
 
-tok = config['weather_token']
-payload = {'Token': tok}
+key = config['weather_rapid_api_key']
+host = config['weather_rapid_api_host']
+# payload = {'Token': tok}
 
-ur = 'https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GHCND&locationid=ZIP:28801&startdate=2019-05-01&enddate=2019-05-01'
+headers = {
+    'x-rapidapi-host': host,
+    'x-rapidapi-key': key
+}
 
-weather = requests.get(ur, headers=payload)
+query = {}
+
+url = "https://community-open-weather-map.p.rapidapi.com/onecall/timemachine"
+
+# ur = 'https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GHCND&locationid=ZIP:28801&startdate=2019-05-01&enddate=2019-05-01'
+
+weather = requests.get(url, headers=headers)
 
 pprint.pprint(weather.json())
 
