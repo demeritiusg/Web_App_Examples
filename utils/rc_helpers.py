@@ -11,6 +11,11 @@ import openpyxl
 from openpyxl.utils import get_column_letter
 from openpyxl.styles import Alignment, Font
 
+
+"""
+Someone was having fun building excel files with this... probably useless
+"""
+
 __all__ = ['WorksheetWriter', 'Excel', 'NewExcel', 'ExistingExcel', 'TempExcel',
            'to_excel', 'to_excel_temp', 'to_xl', 'to_xl_tmp']
 

@@ -3,6 +3,11 @@ import numpy as np
 from datetime import datetime
 import xlsxwriter
 
+"""
+There is a lot of math going on in here that is more than likely wrong. Should fix it.
+"""
+
+
 pd.set_option('display.max_columns', 45)
 
 # product_name = ['gas', 'ngl', 'other', 'oil']

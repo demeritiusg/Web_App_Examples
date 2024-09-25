@@ -1,18 +1,20 @@
+##for deletion
+
 import os
 from aiohttp import web
 
-# TODO need to upload each month
-# TODO encrypt all numbers
-# TODO save every month
-# TODO process every month as a single
-# TODO add SQL capability to build reporting
+## need to upload each month
+## encrypt all numbers
+## save every month
+## process every month as a single
+## add SQL capability to build reporting
 
 
 async def store_mp3_handler(request):
 
     reader = await request.multipart()
 
-    # /!\ Don't forget to validate your inputs /!\
+    # Don't forget to validate your inputs
 
     # reader.next() will `yield` the fields of your form
 

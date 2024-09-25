@@ -4,12 +4,16 @@ from intuitlib.enums import Scopes
 from intuitlib.client import send_request
 from configparser import ConfigParser
 import settings
-import requests
+import requests 
 import base64
 from urllib.parse import parse_qs
 from urllib.parse import urlparse
 import json
 from models import Bearer
+
+"""
+This could be removed and the function added to the request in the other file... 
+"""
 
 
 company = ['FOOT', 'LLC', 'LTD', 'MILL', 'RCP', 'RSM', 'SHR', 'SUN', 'WIRC', 'CYPT']
@@ -19,7 +23,7 @@ def refresh_token(company):
 
     c = company
 
-    redirect_uri = "https://rc.royaltyclearinghouse.com/home/call-back"
+    redirect_uri = "url"
 
     tokens_file = 'tokens.cfg'
     token_config = ConfigParser()

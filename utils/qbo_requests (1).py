@@ -1,4 +1,28 @@
-def update_resources(qbo_base_url, realm_id, oauth, resource_name, resources, QBO_TOKEN_URL, company, config, token_config):
+import yaml as yaml
+import requests as r
+import json
+import pprint
+from configparser import ConfigParser
+import decimal as dec
+
+with open(".config/config.yaml") as f:
+    try:
+        config = yaml.safe_load(f)
+    except yaml.YAMLError as e:
+        print(e)
+
+with open(".config/tokens.cfg") as f:
+    try:
+        token = yaml.safe_load(f)
+    except yaml.YAMLError as e:
+        print(e)
+
+
+def update_resources(qbo_base_url, realm_id, oauth, resource_name, resources, QBO_TOKEN_URL, company, config, token):
+
+    """
+    Maybe this is supposed to refresh token
+    """
 
     url = "{}/company/{}/batch".format(qbo_base_url, realm_id)
     headers = {
@@ -9,11 +33,11 @@ def update_resources(qbo_base_url, realm_id, oauth, resource_name, resources, QB
 
     batch_item_response = []
     
-    c = companay
+    c = company
     exception = None
     resource_idx = 0
     chunk_start = 0
-    chunk_end = chunk_start + CONFIG['batch_item_limit']
+    chunk_end = chunk_start + config['batch_item_limit']
     num_resources = len(resources)
     while chunk_start <= num_resources:
         try:
@@ -30,20 +54,20 @@ def update_resources(qbo_base_url, realm_id, oauth, resource_name, resources, QB
             payload = {}
             payload["BatchItemRequest"] = batch_item_request
 
-            chunk_start += CONFIG['batch_item_limit']
-            chunk_end = chunk_start + CONFIG['batch_item_limit']
+            chunk_start += config['batch_item_limit']
+            chunk_end = chunk_start + config['batch_item_limit']
             
-            response = requests.post(
+            response = r.post(
                 url=url,
                 auth=oauth,
                 headers=headers,
-                data=json_dumps(payload)
+                data=json.json_dumps(payload)
             )
             
             try:
                 response.raise_for_status()
-            except requests.exceptions.HTTPError as e:
-                while e = 401:
+            except r.exceptions.HTTPError as e:
+                while e == 401:
                     oauth.refresh(c)
         
                     refresh_token = oauth.refresh_token
@@ -55,11 +79,11 @@ def update_resources(qbo_base_url, realm_id, oauth, resource_name, resources, QB
                     with open(TOKENS_FILE, 'w+') as tokenfile:
                         token_config.write(tokenfile)
                 
-                    response = requests.post(
+                    response = r.post(
                         url=url,
                         auth=oauth,
                         headers=headers,
-                        data=json_dumps(payload)
+                        data=json.json_dumps(payload)
                     )
 			
                 return "Error: " + str(e)
@@ -87,7 +111,7 @@ def create_resources(qbo_base_url, realm_id, oauth, resource_name, resources, QB
     exception = None
     resource_idx = 0
     chunk_start = 0
-    chunk_end = chunk_start + CONFIG['batch_item_limit']
+    chunk_end = chunk_start + config['batch_item_limit']
     num_resources = len(resources)
     while chunk_start <= num_resources:
         try:
@@ -104,20 +128,20 @@ def create_resources(qbo_base_url, realm_id, oauth, resource_name, resources, QB
             payload = {}
             payload["BatchItemRequest"] = batch_item_request
 
-            chunk_start += CONFIG['batch_item_limit']
-            chunk_end = chunk_start + CONFIG['batch_item_limit']
+            chunk_start += config['batch_item_limit']
+            chunk_end = chunk_start + config['batch_item_limit']
             
-            response = requests.post(
+            response = r.post(
                 url=url,
                 auth=oauth,
 				# token_url=token_url,
                 headers=headers,
-                data=json_dumps(payload)
+                data=json.json_dumps(payload)
             )
             try:
                 response.raise_for_status()
-            except requests.exceptions.HTTPError as e:
-                while e = 401:
+            except r.exceptions.HTTPError as e:
+                while e == 401:
                     oauth.refresh(c)
         
                     refresh_token = oauth.refresh_token
@@ -129,11 +153,11 @@ def create_resources(qbo_base_url, realm_id, oauth, resource_name, resources, QB
                     with open(TOKENS_FILE, 'w+') as tokenfile:
                         token_config.write(tokenfile)
                 
-                    response = requests.post(
+                    response = r.post(
                         url=url,
                         auth=oauth,
                         headers=headers,
-                        data=json_dumps(payload)
+                        data=json.json_dumps(payload)
                     )
 			
                 return "Error: " + str(e)
@@ -147,59 +171,6 @@ def create_resources(qbo_base_url, realm_id, oauth, resource_name, resources, QB
 
     return exception, batch_item_response, resources
 
-def create_resource(qbo_base_url, realm_id, oauth, resource_url, resource, QBO_TOKEN_URL, token_config, dry_run=False, **kwargs):
-
-    # url = fr"{qbo_base_url}/company/{realm_id}/{resource_url}"
-    url = "{}/company/{}/{}".format(qbo_base_url, realm_id, resource_url)
-    headers = {'Accept': 'application/json', 'content-type': 'application/json; charset=utf-8',
-               'User-Agent': 'RC_QBO_Reporting'}
-    if dry_run:
-        print(f"URL:")
-        print("HEADERS")
-        print("-------")
-        pprint(headers)
-        print("RESOURCE")
-        print("--------")
-        pprint(resource)
-        return {
-            'url': url,
-            'headers': headers,
-            'resource': resource
-        }
-    else:
-        response = requests.post(
-                url=url,
-                auth=oauth,
-                # token_url=token_url,
-                headers=headers,
-                data=json_dumps(payload)
-            )
-            try:
-                response.raise_for_status()
-            except requests.exceptions.HTTPError as e:
-                while e = 401:
-                    oauth.refresh(c)
-      
-                    refresh_token = oauth.refresh_token
-                    access_token = oauth.access_token
-        
-                    token_config.set(c, 'refresh_token', refresh_token)
-                    token_config.set(c, 'access_token', access_token)
-                
-                    with open(TOKENS_FILE, 'w+') as tokenfile:
-                        token_config.write(tokenfile)
-                
-                    response = requests.post(
-                        url=url,
-                        auth=oauth,
-                        headers=headers,
-                        data=json_dumps(payload)
-                    )
-			
-                return "Error: " + str(e)
-
-        return response.json(**kwargs)
-
 def request_resource(qbo_base_url, realm_id, oauth, resource_url, QBO_TOKEN_URL, config, floats_as_decimals=False, debug=False):
 
     # url = fr"{qbo_base_url}/company/{realm_id}/{resource_url}"
@@ -207,7 +178,7 @@ def request_resource(qbo_base_url, realm_id, oauth, resource_url, QBO_TOKEN_URL,
     if debug:
         print('[DEBUG] Requesting: %s' % url)
 
-    response = requests.get(
+    response = r.get(
         auth=oauth,
         url=url,
 		# token_url=token_url,

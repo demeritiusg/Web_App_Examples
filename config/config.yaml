@@ -1,6 +1,7 @@
 host: 127.0.0.1
 port: 8080
 DEBUG: True
-weather_token: wsBZBUoKsrYrIoIYKhKDgauCoXBlHRzS
-weather_rapid_api_host: community-open-weather-map.p.rapidapi.com
-weather_rapid_api_key: 90dec2029bmsh7aa1cdbd68b6e4cp1adfa7jsn3bdbc38267ef
+weather_token: ###############################
+weather_rapid_api_host: ###############################
+weather_rapid_api_key: ###############################
+batch_item_limit: 42
