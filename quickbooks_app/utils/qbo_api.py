@@ -124,13 +124,6 @@ class QBO_API:
     the AccessDate, AccessKey, and AccessSecret values will be updated.
     """
 
-    QBO_BASE_URL = 'https://quickbooks.api.intuit.com'
-    QBO_RECONNECT_URL = r'https://appcenter.intuit.com/api/v1/connection/reconnect'
-    QBO_XML_NAMESPACE = r'{http://platform.intuit.com/api/v1}'
-    QBO_TOKEN_URL = r'https://oauth.platform.intuit.com/oauth2/v1/tokens/bearer'
-    QBO_AUTHORIZATION_BASE_URL = r'https://appcenter.intuit.com/connect/oauth2'
-    QBO_REFRESH_URL = QBO_TOKEN_URL
-
     def __repr__(self):
         env = self.env_type
         companies = ' '.join(self.companies)
@@ -140,16 +133,16 @@ class QBO_API:
 
         c = company
 
-        TOKENS_FILE = r'{}\tokens\tockens.cfg'.format(BASE_DIR)
-        token_config = ConfigParser()
-        token_config.read(TOKENS_FILE)
+        # TOKENS_FILE = f'{BASE_DIR}/tokens/tockens.cfg'
+        # token_config = ConfigParser()
+        # token_config.read(TOKENS_FILE)
 
-        stoken = token_config[c]['access_token']
-        realm_id = token_config[c]['realm_id']
+        # stoken = token_config[c]['access_token']
+        # realm_id = token_config[c]['realm_id']
 
         base_resource_url = self.QBO_BASE_URL.format(accounting_url=self.config['APP']['accounting_url'])
 
-        oauth = 'Bearer ' + stoken
+        # oauth = 'Bearer ' + stoken
 
         return realm_id, oauth
 

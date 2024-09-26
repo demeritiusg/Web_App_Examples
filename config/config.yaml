@@ -1,7 +1,0 @@
-host: 127.0.0.1
-port: 8080
-DEBUG: True
-weather_token: ###############################
-weather_rapid_api_host: ###############################
-weather_rapid_api_key: ###############################
-batch_item_limit: 42

@@ -1,7 +1,3 @@
-from intuitlib.client import AuthClient
-from intuitlib.exceptions import AuthClientError
-from intuitlib.enums import Scopes
-from intuitlib.client import send_request
 from configparser import ConfigParser
 import settings
 import requests 
@@ -11,13 +7,10 @@ from urllib.parse import urlparse
 import json
 from models import Bearer
 
-"""
-This could be removed and the function added to the request in the other file... 
-"""
 
+# NEEDS TO RECIEVE USERS INPUT ON WHICH COMPANY TO LOGIN FROM APP... MAYBE A DIFFERENT FILE
 
 company = ['FOOT', 'LLC', 'LTD', 'MILL', 'RCP', 'RSM', 'SHR', 'SUN', 'WIRC', 'CYPT']
-
 
 def refresh_token(company):
 
@@ -29,10 +22,10 @@ def refresh_token(company):
     token_config = ConfigParser()
     token_config.read(tokens_file)
 
-    realm_id = token_config[c]['realm_id']
+    QBO_CLIENT_ID = token_config[c]['QBO_CLIENT_ID']
 
     auth_client = AuthClient(
-        client_id=token_config[c]['client_id'],
+        client_id=token_config[c]['QBO_CLIENT_ID'],
         client_secret=token_config[c]['client_secret'],
         redirect_uri=redirect_uri,
         environment=token_config[c]['environment'],  # “sandbox” or “production”
